@@ -12,6 +12,7 @@ import {
 import processCasesUpdate from "./processCasesUpdate";
 import processBuildingsUpdate from "./processBuildingsUpdate";
 import { clusterWithCasesToInput } from "./resolveCluster";
+import { parseVersionDate } from "./utils";
 
 export default function setup(client: PrismaClient) {
   // “At minute 30 past every hour.”
@@ -37,9 +38,19 @@ async function start(client: PrismaClient) {
       fetchLatestHistorialClustersVersion(),
     ]);
     if (app.lastHistoricalCasesVersion !== latestHistorialCasesVersion) {
-      const prevVersion = await fetchCases(latestHistorialCasesVersion);
-      const currentVersion = await fetchCases();
-      await processCasesUpdate(client, prevVersion, currentVersion);
+      const prevVList = await fetchCases(latestHistorialCasesVersion);
+      const currentList = await fetchCases();
+      await processCasesUpdate(
+        client,
+        {
+          date: parseVersionDate(latestHistorialCasesVersion),
+          list: prevVList,
+        },
+        {
+          date: new Date(),
+          list: currentList,
+        }
+      );
       await client.app.update({
         where: { id: 0 },
         data: { lastHistoricalCasesVersion: latestHistorialCasesVersion },
@@ -48,9 +59,19 @@ async function start(client: PrismaClient) {
     if (
       app.lastHistoricalBuildingsVersion !== latestHistorialBuildingsVersion
     ) {
-      const prevVersion = await fetchBuildings(latestHistorialBuildingsVersion);
-      const currentVersion = await fetchBuildings();
-      await processBuildingsUpdate(client, prevVersion, currentVersion);
+      const prevVList = await fetchBuildings(latestHistorialBuildingsVersion);
+      const currentList = await fetchBuildings();
+      await processBuildingsUpdate(
+        client,
+        {
+          date: parseVersionDate(latestHistorialCasesVersion),
+          list: prevVList,
+        },
+        {
+          date: new Date(),
+          list: currentList,
+        }
+      );
       await client.app.update({
         where: { id: 0 },
         data: {

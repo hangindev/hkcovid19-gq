@@ -1,11 +1,12 @@
+import * as dotenv from "dotenv";
 import { use, settings } from "nexus";
 import { prisma } from "nexus-plugin-prisma";
 import { PrismaClient } from "nexus-plugin-prisma/client";
 import setupCronJob from "../lib/cronjob";
 
-const client = new PrismaClient({
-  log: ["query", "info", "warn"],
-});
+dotenv.config({ path: "prisma/.env" });
+
+const client = new PrismaClient();
 
 // Reference: https://nexusjs.org/api/nexus/setting
 settings.change({

@@ -11,11 +11,6 @@ export type ClusterWithCases = { name: string; cases: number[] };
 
 const resolveCluster = (rawData): ClusterWithCases | null => {
   const data = trimKeys(rawData);
-  console.log(rawData);
-  console.log({
-    name: resolveName(data),
-    cases: resolveCases(data),
-  });
   try {
     return {
       name: resolveName(data),
