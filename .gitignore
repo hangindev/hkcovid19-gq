@@ -1,0 +1,8 @@
+.nexus
+
+node_modules
+.DS_Store
+.vscode
+.env
+
+prisma/migrations

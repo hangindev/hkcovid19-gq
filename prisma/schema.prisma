@@ -1,0 +1,100 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Gender {
+  FEMALE
+  MALE
+}
+
+enum Status {
+  DECEASED
+  DISCHARGED
+  HOSPITALISED
+  PENDING_ADMISSION
+  NO_ADMISSION
+  TO_BE_PROVIDED
+}
+
+enum Classification {
+  IMPORTED
+  LINKED_WITH_IMPORTED
+  LINKED_WITH_LOCAL
+  LINKED_WITH_POSSIBLY_LOCAL
+  LOCAL
+  POSSIBLY_LOCAL
+}
+
+enum District {
+  CENTRAL_AND_WESTERN
+  EASTERN
+  ISLANDS
+  KOWLOON_CITY
+  KWAI_TSING
+  KWUN_TONG
+  NORTH
+  SAI_KUNG
+  SHA_TIN
+  SHAM_SHUI_PO
+  SOUTHERN
+  TAI_PO
+  TSUEN_WAN
+  TUEN_MUN
+  WAN_CHAI
+  WONG_TAI_SIN
+  YAU_TSIM_MONG
+  YUEN_LONG
+  NA
+}
+
+model Case {
+  id              Int @id
+  age             Int
+  gender          Gender
+  reportDate      DateTime
+  onsetDate       DateTime?
+  admissionDate   DateTime?
+  dischargeDate   DateTime?
+  deceaseDate     DateTime? 
+  confirmed       Boolean
+  asymptomatic    Boolean?
+  isHkResident    Boolean?
+  status          Status
+  classification  Classification
+  buildings       Building[]  @relation(references: [id])
+  clusters        Cluster[]   @relation(references: [id])
+}
+
+model Cluster {
+  id      Int @id @default(autoincrement())
+  name    String @unique
+  cases   Case[] @relation(references: [id])
+}
+
+model Building {
+  id                          Int @id @default(autoincrement())
+  name                        String
+  district                    District
+  lastDateOfResidenceOfCases  DateTime?
+  isResidential               Boolean
+  cases                       Case[] @relation(references: [id])
+  note                        String?
+  
+  @@unique([name, district], name: "address")
+}
+
+// App state: singleton 
+model App {
+  id                              Int @id 
+  lastHistoricalCasesVersion      String?
+  lastHistoricalBuildingsVersion  String?
+  lastHistoricalClustersVersion   String?
+}

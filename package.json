@@ -1,0 +1,44 @@
+{
+  "name": "hkcovid19.gq",
+  "version": "0.1.0",
+  "description": "A GraphQL Endpoint for the data of Covid-19 in Hong Kong.",
+  "author": "Jason Leung <hangindev@gmail.com>",
+  "scripts": {
+    "dev": "nexus dev",
+    "build": "nexus build",
+    "start": "pm2 restart ecosystem.config.js",
+    "cron": "ts-node lib/cronjob.ts",
+    "seed": "ts-node lib/seed.ts",
+    "blowitallaway": "ts-node lib/blowitallaway.ts",
+    "studio": "npx prisma studio --experimental",
+    "migrate-save": "npx prisma migrate save --experimental",
+    "migrate-up": "npx prisma migrate up --experimental"
+  },
+  "keywords": [
+    "hong kong",
+    "香港",
+    "covid-19",
+    "nexus",
+    "prisma",
+    "graphql"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "d3-dsv": "^1.2.0",
+    "d3-time-format": "^2.2.3",
+    "dotenv": "^8.2.0",
+    "got": "^11.5.1",
+    "lodash": "^4.17.19",
+    "nexus": "^0.26.1",
+    "nexus-plugin-prisma": "^0.17.0",
+    "node-cron": "^2.0.3",
+    "pg": "^8.3.0"
+  },
+  "devDependencies": {
+    "@types/d3-dsv": "^1.0.36",
+    "@types/d3-time-format": "^2.1.1",
+    "@types/lodash": "^4.14.159",
+    "@types/node-cron": "^2.0.3",
+    "@types/pg": "^7.14.4"
+  }
+}
