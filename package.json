@@ -22,7 +22,6 @@
     "prisma",
     "graphql"
   ],
-  "license": "ISC",
   "dependencies": {
     "d3-dsv": "^1.2.0",
     "d3-time-format": "^2.2.3",
@@ -40,5 +39,7 @@
     "@types/lodash": "^4.14.159",
     "@types/node-cron": "^2.0.3",
     "@types/pg": "^7.14.4"
-  }
+  },
+  "license": "MIT",
+  "homepage": "https://hkcovid19.gq"
 }
