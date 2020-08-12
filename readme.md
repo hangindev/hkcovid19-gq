@@ -7,7 +7,7 @@ The Hong Kong Covid-19 API is a GraphQL endpoint based on the data provided in [
 **Endpoint/Playground: [https://hkcovid19.gq](https://hkcovid19.gq)**
 
 There are 6 queries in total: `case`, `cases`, `building`, `buildings`, `cluster`, and `clusters`.
-The singular field has a required primary key argument and is used to look up a specific record while the plural field returns all records of that type by default, but includes an optional argument that can be used to filter and order the results.
+The singular query is used to look up a specific record while the plural field returns all records of that type by default, and includes an optional argument that can be used to filter and order the results.
 
 > New to GraphQL? check the [docs](https://graphql.org/learn/)
 
