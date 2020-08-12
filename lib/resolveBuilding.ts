@@ -68,7 +68,7 @@ const resolveLastDateOfResidenceOfCases = (data): Date | null =>
   timeParse("%d/%m/%Y")(data["Last date of residence of the case(s)"]);
 
 const resolveIsResidential = (data): boolean =>
-  !!data["Building name"].match(
+  !data["Building name"].match(
     /\(non residential building\)|\(non-residential\)/gi
   );
 
