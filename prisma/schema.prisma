@@ -56,14 +56,14 @@ enum District {
 }
 
 model Case {
-  id              Int @id
+  id              Int @id  /// Case Number   
   age             Int
   gender          Gender
   reportDate      DateTime
   onsetDate       DateTime?
   admissionDate   DateTime?
   dischargeDate   DateTime?
-  deceaseDate     DateTime? 
+  deceaseDate     DateTime?
   confirmed       Boolean
   asymptomatic    Boolean?
   isHkResident    Boolean?
