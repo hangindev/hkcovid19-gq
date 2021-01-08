@@ -17,8 +17,9 @@ Here are some examples:
 # Query all cases since August and the related buildings
 query {
   cases(
-    orderBy: { reportDate: asc }
-    where: { reportDate: { gte: "2020-08-01T00:00:00Z" } }
+    orderBy: { reportDate: desc }
+    where: { reportDate: { gte: "2021-01-01T00:00:00Z" } }
+    first: 20
   ) {
     id
     age
